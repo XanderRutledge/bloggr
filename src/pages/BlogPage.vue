@@ -1,7 +1,7 @@
 <template>
   <div class="Blog container">
-    <h1>{{blog.blog.title}}</h1>
-    <p>{{blog.blog.body}}</p>
+    <h1>{{blog.title}}</h1>
+    <p>{{blog.body}}</p>
     <form class="form text-center" @submit.prevent="editActiveBlog()">
       <textarea
         type="string"
@@ -52,20 +52,21 @@ export default {
     return {
       newComment: {
         body: "",
-        blogId: this.$store.state.activeBlog.blog.id
+        blogId: this.$store.state.activeBlog.id
       },
       editBlog: {
         body: "",
-        id: this.$store.state.activeBlog.blog.id
+        id: this.$store.state.activeBlog.id
       }
     };
   },
   computed: {
     blog() {
       return this.$store.state.activeBlog;
+      console.log(this.$store.state.activeBlog);
     },
     ActiveBlogId() {
-      return this.$store.state.activeBlog.blog.id;
+      return this.$store.state.activeBlog.id;
     },
     comments() {
       return this.$store.state.activeComments;
@@ -76,7 +77,7 @@ export default {
       this.$store.dispatch("createComment", { ...this.newComment });
       this.newComment = {
         body: "",
-        blogId: this.$store.state.activeBlog.blog.id
+        blogId: this.$store.state.activeBlog.id
       };
     },
     editActiveBlog() {
